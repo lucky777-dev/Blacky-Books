@@ -12,7 +12,8 @@ def db(c):
                  ("Anne", "Onyme", "01/01/1991", "anne@onyme.net", "123")]
     c.executemany("INSERT INTO readers VALUES (?, ?, ?, ?, ?)", all_users)
     print("\n3 users added!")
-    tmp = c.execute("SELECT * FROM readers").fetchall()
+    c.execute("SELECT * FROM readers")
+    tmp = c.fetchall()
     for i in tmp:
         print(f"{i[0]}\t {i[1]}\t {i[2]}\t {i[3]}\t {i[4]})")
     c.execute("CREATE TABLE books (name TEXT, author TEXT)")
@@ -46,12 +47,10 @@ def db(c):
                         ("Harry Potter et les reliques de la mort", "J. K. Rowling")]
     c.executemany("INSERT INTO books VALUES (?, ?)", all_books)
     print("\n24 books added!")
-    tmp = c.execute("SELECT * FROM books").fetchall()
+    c.execute("SELECT * FROM books")
+    tmp = c.fetchall()
     for i in tmp:
         print(f"{i[0]}\t ({i[1]})")
-
-    c.execute("CREATE TABLE loan (user TEXT, book TEXT)")
-    print("\nLoan database created")
         
 if __name__ == "__main__":
     #Connects to database (creates it if it doesn't exists)
